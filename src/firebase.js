@@ -16,7 +16,11 @@ firebase.initializeApp(config);
 
 // making network connection
 const firebaseDB = firebase.database();
-// accessing the database
-firebaseDB.ref("matches").once("value").then((snapshot) => {
-    console.log(snapshot.val());
-})
+// request to get the matches from firebase
+const firebaseMatches = firebaseDB.ref("matches");
+
+
+export {
+    firebase,
+    firebaseMatches
+}

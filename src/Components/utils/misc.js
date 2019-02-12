@@ -23,3 +23,28 @@ export const Tag = props => {
     return template;
   }
 };
+
+// fuction that at the end will return something. it will recieve the snapshot as a argument. this function will loop the snapshot.
+export const firebaseLooper = snapshot => {
+  // after the loop this data will contain all of the records in the form that we want
+  let data = [];
+
+  snapshot.forEach(childSnapshot => {
+    // on each loop we grap some data and push in to Data
+    data.push({
+      // push the entire object as well as the id
+      ...childSnapshot.val(),
+      id: childSnapshot.key
+    });
+  });
+  // return the new data form
+  return data;
+};
+
+export const reverseArray = actualArray => {
+  let reversedArray = [];
+  for (let i = actualArray.length - 1; i >= 0; i--) {
+    reversedArray.push(actualArray[i]);
+  }
+  return reversedArray;
+};
