@@ -10,7 +10,9 @@ export const Tag = props => {
         color: props.color,
         padding: "5px 10px",
         display: "inline-block",
-        fontFamily: "Righteous"
+        fontFamily: "Righteous",
+        marginBottom: "20px",
+        border: "1px solid"
       }}
     >
       {props.children}
