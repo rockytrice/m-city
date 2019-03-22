@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormField = ({ formdata, id }) => {
+const FormField = ({ formdata, id, change }) => {
   const renderTemplate = () => {
     let formTemplate = null;
     // switch that will check what type of input we have in email
@@ -10,7 +10,11 @@ const FormField = ({ formdata, id }) => {
         formTemplate = (
           <div>
             {/* all the fields that were in the config */}
-            <input {...formdata.config} value={formdata.value} />
+            <input
+              {...formdata.config}
+              value={formdata.value}
+              onChange={event => change({ event, id })}
+            />
           </div>
         );
         break;

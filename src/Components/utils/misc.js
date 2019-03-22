@@ -50,3 +50,17 @@ export const reverseArray = actualArray => {
   }
   return reversedArray;
 };
+
+export const validate = element => {
+  // if the input is valid we will return an array. the array will say if the input is true, which is valid, or false(not valid) and in the second position a message
+  let error = [true, ""];
+  // checking if required equals true
+  if (element.validation.required) {
+    const valid = element.value.trim() !== "";
+    const message = `${!valid ? "This field is required" : ""}`;
+
+    // if the error is equal to not valid append the array with valid(false) and the message if the element is false
+    error = !valid ? [valid, message] : error;
+  }
+  return error;
+};
