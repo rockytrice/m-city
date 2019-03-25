@@ -53,11 +53,34 @@ class Enroll extends Component {
     newElement.valid = validateData[0];
     newElement.validationMessage = validateData[1];
     console.log(newFormdata);
-    this.setState({ formdata: newFormdata });
+    this.setState({
+      formdata: newFormdata,
+      formError: false
+    });
   }
 
   //   function to submit form in the Enroll section
-  submitForm() {}
+  submitForm(event) {
+    event.preventDefault();
+    // this will be hosting the data
+    let dataToSubmit = {};
+    // this will be true or false. before we start checking it will assume that all the inputs are valid
+    let formIsValid = true;
+    // so now go through all the formdata and check to see if they are valid true
+    for (let key in this.state.formdata) {
+      // on each loop grab the key(email) and push a new value to dataToSubmit just with the key. note that key has a value!!
+      dataToSubmit[key] = this.state.formdata[key].value;
+      formIsValid = this.state.formdata[key].valid && formIsValid;
+
+      if (formIsValid) {
+        console.log(dataToSubmit);
+      } else {
+        this.setState({
+          formError: true
+        });
+      }
+    }
+  }
 
   render() {
     return (
@@ -72,6 +95,13 @@ class Enroll extends Component {
                 formdata={this.state.formdata.email}
                 change={element => this.updateForm(element)}
               />
+              {/* form error display message */}
+              {this.state.formError ? (
+                <div className="error_label">
+                  opps!! Something went wrong, try again.
+                </div>
+              ) : null}
+              <button onClick={event => this.submitForm(event)}>Enroll</button>
             </div>
           </form>
         </div>
