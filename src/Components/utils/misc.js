@@ -54,6 +54,13 @@ export const reverseArray = actualArray => {
 export const validate = element => {
   // if the input is valid we will return an array. the array will say if the input is true, which is valid, or false(not valid) and in the second position a message
   let error = [true, ""];
+
+  if (element.validation.email) {
+    const valid = /\S+@\S+/.test(element.value);
+    const message = `${!valid ? "Must be a valid email" : ""}`;
+    error = !valid ? [valid, message] : error;
+  }
+
   // checking if required equals true
   if (element.validation.required) {
     const valid = element.value.trim() !== "";
